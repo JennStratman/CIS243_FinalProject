@@ -1,11 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
-
+<!DOCTYPE html>
+<html>
 <head>
-<title>PC Order</title>
-       <meta name="author" content="EDCC" />
-       <meta name="keywords" content="final project 'PC Superstore', based on wireframe" />
-       <meta name="description" content="This template is intended to be used as a base to build my PC Superstore web page." />
+<title>Travel Order</title>
+       <meta name="author" content="Jennifer Stratman" />
+       <meta name="keywords" content="final project 'Travel Store', based on wireframe" />
+       <meta name="description" content="This is a mock Travel Store for final project in CIS243." />
        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
        <meta name="robots" content="none" />
 	   <link rel="stylesheet" href="pcStyle.css" type="text/css" />
@@ -13,120 +12,80 @@
 	   <script src="library.js" type="text/javascript"></script>
 	   <script type="text/javascript" src="cookies.js"></script>
 </head>
-<body>
-<table name="main" cellpadding="5" width="100%" border="0">
-	<tr>
-		<td width="100"></td>
-		<td></td>
-		<td width="1"></td>
-		<td></td>
-		<td width="1"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<img src="graphics/pc.jpeg" width="238" height="120" alt="" border="0">
-		</td>
-		<td valign="bottom" class="header">PCSuperstoreExample.com Lab: Jennifer Stratman, 05/10/2017</td>
-		<td width="1px">&nbsp;</td>
-		<td width="300" valign="bottom" class="contact">
-			20000 68th Ave. W<br />
-			Lynnwood, WA 98036<br />
-			425.222.1234
-		</td>
-	</tr>
-	<tr>
-		<td colspan="6">
-			<hr style="background-color:white" />
-		</td>
-	</tr>
-	<tr>
-		<td rowspan="3" valign="top" nowrap="nowrap" class="orderSum">
-			<a href="home.html" class="orderSum">Home</a><br />
-			<a href="contact.html" class="orderSum">Contact Us</a><br />
-			<a href="order.html" class="orderSum">Order Now</a>
-		</td>
-		<td rowspan="3" width="1" style="background-color: White;"></td>
-		
-		<td valign="top" class="menu" width="1000">
-			<form>
-			<table class="menu" border="0" width="100%">
-				<tr>
-					<td valign="top">Select your PC size:</td>
-					<td>
-						<input type="radio" name="rdoSize" value="1" onclick="return orderSummary()" /> Desktop<br />
-						<input type="radio" name="rdoSize" value="2" checked="checked" onclick="return orderSummary()" /> Workstation<br />
-						<input type="radio" name="rdoSize" value="3" onclick="return orderSummary()" /> Server<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><hr style="background-color:white" /></td>
-				</tr>
-				<tr>
-					<td valign="top">Select your warranty type:</td>
-					<td valign="top" nowrap="nowrap">
-						<input type="radio" name="rdoWarranty" value="ht" checked="checked" onclick="return orderSummary()" /> 1 year<br />
-						<input type="radio" name="rdoWarranty" value="dd"  onclick="return orderSummary()" /> 2 years
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><hr style="background-color:white" /></td>
-				</tr>
-				<tr>
-					<td>Build your own</td>
-					<td><input type="radio" name="rdoType" value="build" checked="checked" onclick="return changeOption();" /></td>
-				</tr>
-				<tr id="options">
-					<td colspan="2">
-						<table width="100%">
-							<tr>
-								<td width="100"></td>
-								<td nowrap="nowrap">
-									<input type="checkbox" value="Monitor" name="chkOption" onclick="return orderSummary()"> Monitor <br />
-									<input type="checkbox" value="Keyboard" name="chkOption" onclick="return orderSummary()"> Keyboard <br />
-									<input type="checkbox" value="Mouse" name="chkOption" onclick="return orderSummary()"> Mouse <br />
-								</td>
-								<td nowrap="nowrap">
-									<input type="checkbox" value="GraphicsCard" name="chkOption" onclick="return orderSummary()"> Graphics Card <br />
-									<input type="checkbox" value="WirelessReceiver" name="chkOption" onclick="return orderSummary()"> Wireless Receiver <br />
-									<input type="checkbox" value="RAIDHarddrive" name="chkOption" onclick="return orderSummary()"> RAID Harddrive <br />
-								</td>
-<!-- Additional options added for the challenge -->								
-								<td nowrap="nowrap">
-									<input type="checkbox" value="SolidStateDrive" name="chkOption" onclick="return orderSummary()"> Solid State Drive <br />
-									<input type="checkbox" value="BoseSpeakers" name="chkOption" onclick="return orderSummary()"> Bose Speakers <br />
-								</td>					
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td valign="top">Or Select from one of our speciality PCs</td>
-					<td nowrap="nowrap">
-						<input type="radio" name="rdoType" value="standard" onclick="return hideOption();" /> Standard<br />
-						<input type="radio" name="rdoType" value="premium" onclick="return hideOption();" /> Premium<br />
-						<input type="radio" name="rdoType" value="ultimate" onclick="return hideOption();" /> Ultimate
-					</td>
-				</tr>
-			</table>
-			</form>
-		</td>
-		<td rowspan="3" width="1" style="background-color: White;"></td>
-		<td class="orderSum" valign="top">
-			<div id="orderSum" style="height: 175px">Order Summary: <br />Workstation 1 year Warranty <br /></div>
-			<br /><br /><br />
-			<div id="priceSum">
-			<table width="100%"> <tr><td>Subtotal:</td> <td align='right'>$1999.95</td></tr><tr><td>Tax:</td> <td align="right" style="border-bottom-color: White; border-bottom-width: 1px; border-bottom-style: solid;">.78</td></tr><tr> <td>Total:</td> <td align='right'>$1999.99</td></tr></table>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td valign="top" class="menu" width="1000">
-			<center><input type="button" onclick="return writePCCookies()" value="Submit Your Order"></center>
-		</td>
-	</tr>
-</table>
 
+<body>
+  <header>
+    <img src="graphics/pc.jpeg" width="238" height="120" alt="" border="0" style="float: left; display: inline;">
+    <h1>Jennifer Stratman's Travel Emporium</h1>
+    <div class="address" style="display: inline; float: right;">20000 68th Ave. W<br />
+		     Lynnwood, WA 98036<br />
+		     425.222.1234</div>
+  </header>
+
+  <div class="wrapper">
+    <nav style="position:relative; float: left;">
+      <a href="home.html" class="orderSum">Home</a><br />
+      <a href="contact.html" class="orderSum">Contact Us</a><br />
+      <a href="order.html" class="orderSum">Order Now</a>
+  </nav>
+
+  <article>
+    <form>
+      <label>Pick your destination:</label>
+	<input type="radio" name="rdoSize" value="1" onclick="return orderSummary()" /> Orlando, FL<br />
+	<input type="radio" name="rdoSize" value="2" checked="checked" onclick="return orderSummary()" /> Maui, HI<br />
+	<input type="radio" name="rdoSize" value="3" onclick="return orderSummary()" /> Baja California, Mexico<br />
+
+<!-- This section was added (not in the template) so will need to update at least test.js, if not other files -->	  
+	<label>How many are in your party?</label>
+	  <select name="partySize">
+            <option value="1">Flying solo</option>
+            <option value="2">Two to tango</option>
+            <option value="3">Three's company</option>
+            <option value="4">Four's a crowd</option>
+	    <option value="5">High five</option>
+	    <option value="6">Half dozen</option>
+	    <option value="7">Seven is heaven</option>
+	    <option value="8">Eight is great</option>
+	    <option value="9">Nine is fine</option>
+          </select>
+<!-- Need to change radio button name both here and in test.js -->	  
+	<label>Select your length of stay:</label>
+	  <input type="radio" name="rdoWarranty" value="ht" checked="checked" onclick="return orderSummary()"/> 3 days / 2 nights
+	  <input type="radio" name="rdoWarranty" value="dd" onclick="return orderSummary()" /> 6 days / 5 nights
+	 <!-- May add another <input/> for 9 days / 8 nights. Will need to add information to test.js-->
+	  
+	<label>Build your own adventures</label>
+	  <input type="radio" name="rdoType" value="build" checked="checked" onclick="return changeOption();"/>							<input type="checkbox" value="Monitor" name="chkOption" onclick="return orderSummary()"> Monitor <br />
+	  <input type="checkbox" value="Golf" name="chkOption" onclick="return orderSummary()"> Golf <br />
+	  <input type="checkbox" value="BeachParty" name="chkOption" onclick="return orderSummary()"> Beach Party <br />
+	  <input type="checkbox" value="Snorkeling" name="chkOption" onclick="return orderSummary()"> Snorkeling <br />
+	  <input type="checkbox" value="Fishing" name="chkOption" onclick="return orderSummary()"> Fishing <br />
+	  <input type="checkbox" value="DuneBuggy" name="chkOption" onclick="return orderSummary()"> Dune Buggy <br />
+	  <input type="checkbox" value="HoreRide" name="chkOption" onclick="return orderSummary()"> Horseback Riding <br />
+	  <input type="checkbox" value="GuidedHike" name="chkOption" onclick="return orderSummary()"> Guided Hike <br />
+	  <input type="checkbox" value="BoatTour" name="chkOption" onclick="return orderSummary()"> 3 Hour Boat Tour <br />
+	  <input type="checkbox" value="WineryTour" name="chkOption" onclick="return orderSummary()"> Winery Tour <br />
+	  <input type="checkbox" value="BikeTour" name="chkOption" onclick="return orderSummary()"> Bike Tour <br />
+	  <input type="checkbox" value="Spa" name="chkOption" onclick="return orderSummary()"> Spa <br />
+	  <input type="checkbox" value="RockClimbing" name="chkOption" onclick="return orderSummary()"> Rock Climbing <br />
+	<label>Or select from one of our specialty packages</label>
+	  <input type="radio" name="rdoType" value="standard" onclick="return hideOption();" /> Adventurer<br />
+	  <input type="radio" name="rdoType" value="premium" onclick="return hideOption();" /> Water Lover<br />
+	  <input type="radio" name="rdoType" value="ultimate" onclick="return hideOption();" /> Beach Bum
+	  
+       <center><input type="button" onclick="return writePCCookies()" value="Submit Your Order"></center>
+    </form>
+  </article>
+  <aside>
+    <div class="orderSum" id="orderSum" style="height: 175px">Order Summary: <br />3 days / 2 nights <br /></div>
+      <br /><br /><br />
+      <div id="priceSum">
+	<p>Subtotal: $1999.95</p>
+	<p style="border-bottom-color: White; border-bottom-width: 1px; border-bottom-style: solid;">Tax: .78</p>
+	<p>Total: $1999.99</p>
+      </div>	
+  </aside>
 
 <script type="text/javascript">
 <!--
@@ -138,5 +97,4 @@ orderSummary();
 </script>
 
 </body>
-
 </html>
