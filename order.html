@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Travel Order</title>
@@ -7,85 +7,116 @@
        <meta name="description" content="This is a mock Travel Store for final project in CIS243." />
        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
        <meta name="robots" content="none" />
-	   <link rel="stylesheet" href="pcStyle.css" type="text/css" />
+	   <link rel="stylesheet" href="travelStyle.css" type="text/css" />
 		<script type="text/javascript" src="test.js"></script>
-	   <script src="library.js" type="text/javascript"></script>
+<!--	   <script src="library.js" type="text/javascript"></script> -->
 	   <script type="text/javascript" src="cookies.js"></script>
+	   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
   <header>
-    <img src="graphics/pc.jpeg" width="238" height="120" alt="" border="0" style="float: left; display: inline;">
+<!--    <img src="graphics/beach.jpeg" width="238" height="120" alt="" border="0"> -->
     <h1>Jennifer Stratman's Travel Emporium</h1>
-    <div class="address" style="display: inline; float: right;">20000 68th Ave. W<br />
+    <div class="address">20000 68th Ave. W<br />
 		     Lynnwood, WA 98036<br />
 		     425.222.1234</div>
   </header>
 
   <div class="wrapper">
-    <nav style="position:relative; float: left;">
-      <a href="home.html" class="orderSum">Home</a><br />
+    <nav class="linkhead" id="navLink">
+      <a href="index.html" class="orderSum">Home</a><br />
       <a href="contact.html" class="orderSum">Contact Us</a><br />
       <a href="order.html" class="orderSum">Order Now</a>
+      <a href="javascript:void(0);" class="icon" onclick="navFunction()">&#9776;</a>
   </nav>
 
   <article>
     <form>
-      <label>Pick your destination:</label>
-	<input type="radio" name="rdoSize" value="1" onclick="return orderSummary()" /> Orlando, FL<br />
-	<input type="radio" name="rdoSize" value="2" checked="checked" onclick="return orderSummary()" /> Maui, HI<br />
-	<input type="radio" name="rdoSize" value="3" onclick="return orderSummary()" /> Baja California, Mexico<br />
+      <label>Select the duration of your stay:</label>
+      <div class="info_block">
+        <input type="radio" name="rdoDuration" value="3 days / 2 nights" checked="checked" onclick="return orderSummary()"/> 3 days / 2 nights
+  	    <input type="radio" name="rdoDuration" value="6 days / 5 nights" onclick="return orderSummary()" /> 6 days / 5 nights
+  	    <input type="radio" name="rdoDuration" value="9 days / 8 nights" onclick="return orderSummary()" /> 9 days / 8 nights
+      </div>
 
-<!-- This section was added (not in the template) so will need to update at least test.js, if not other files -->	  
-	<label>How many are in your party?</label>
-	  <select name="partySize">
-            <option value="1">Flying solo</option>
-            <option value="2">Two to tango</option>
-            <option value="3">Three's company</option>
-            <option value="4">Four's a crowd</option>
-	    <option value="5">High five</option>
-	    <option value="6">Half dozen</option>
-	    <option value="7">Seven is heaven</option>
-	    <option value="8">Eight is great</option>
-	    <option value="9">Nine is fine</option>
-          </select>
-<!-- Need to change radio button name both here and in test.js -->	  
-	<label>Select your length of stay:</label>
-	  <input type="radio" name="rdoWarranty" value="ht" checked="checked" onclick="return orderSummary()"/> 3 days / 2 nights
-	  <input type="radio" name="rdoWarranty" value="dd" onclick="return orderSummary()" /> 6 days / 5 nights
-	 <!-- May add another <input/> for 9 days / 8 nights. Will need to add information to test.js-->
-	  
-	<label>Build your own adventures</label>
-	  <input type="radio" name="rdoType" value="build" checked="checked" onclick="return changeOption();"/>							<input type="checkbox" value="Monitor" name="chkOption" onclick="return orderSummary()"> Monitor <br />
+      <label>Pick your destination:</label>
+      <div class="info_block">
+        <input type="radio" name="rdoDestination" value="1" onclick="return orderSummary()" /> Baja California, Mexico<br />
+	      <input type="radio" name="rdoDestination" value="2" checked="checked" onclick="return orderSummary()" /> Maui, HI<br />
+	      <input type="radio" name="rdoDestination" value="3" onclick="return orderSummary()" /> Orlando, FL<br />
+      </div>
+
+      <!-- This section was added (not in the template) so will need to update at least test.js, if not other files -->
+      	    <label>How many are in your party?</label>
+            <div class="info_block">
+      <!-- Need to change figure out how to call the selected value and pull the information into the summary
+       both here and in test.js -->
+            <select id="numberPeople" name="partySize" onchange="numPeople(this.form);">
+              <option value="1">Flying solo</option>
+              <option value="2">Two to tango</option>
+              <option value="3">Three's company</option>
+              <option value="4">Four's a crowd</option>
+              <option value="5">High five</option>
+              <option value="6">Half dozen</option>
+      	      <option value="7">Seven is heaven</option>
+      	      <option value="8">Eight is great</option>
+      	      <option value="9">Nine is fine</option>
+            </select>
+            </div>
+
+<div class="selections">
+	<div class="buildLabel">
+      <label>Build your own adventures</label>
+      <input type="radio" name="rdoType" value="build" checked="checked" onclick="return changeOption();"/>
+  </div>
+  <div class="info_block" id="options">
+    <div class="left">
+    <div id="left_left">
 	  <input type="checkbox" value="Golf" name="chkOption" onclick="return orderSummary()"> Golf <br />
-	  <input type="checkbox" value="BeachParty" name="chkOption" onclick="return orderSummary()"> Beach Party <br />
-	  <input type="checkbox" value="Snorkeling" name="chkOption" onclick="return orderSummary()"> Snorkeling <br />
-	  <input type="checkbox" value="Fishing" name="chkOption" onclick="return orderSummary()"> Fishing <br />
-	  <input type="checkbox" value="DuneBuggy" name="chkOption" onclick="return orderSummary()"> Dune Buggy <br />
-	  <input type="checkbox" value="HoreRide" name="chkOption" onclick="return orderSummary()"> Horseback Riding <br />
-	  <input type="checkbox" value="GuidedHike" name="chkOption" onclick="return orderSummary()"> Guided Hike <br />
-	  <input type="checkbox" value="BoatTour" name="chkOption" onclick="return orderSummary()"> 3 Hour Boat Tour <br />
-	  <input type="checkbox" value="WineryTour" name="chkOption" onclick="return orderSummary()"> Winery Tour <br />
-	  <input type="checkbox" value="BikeTour" name="chkOption" onclick="return orderSummary()"> Bike Tour <br />
 	  <input type="checkbox" value="Spa" name="chkOption" onclick="return orderSummary()"> Spa <br />
-	  <input type="checkbox" value="RockClimbing" name="chkOption" onclick="return orderSummary()"> Rock Climbing <br />
-	<label>Or select from one of our specialty packages</label>
-	  <input type="radio" name="rdoType" value="standard" onclick="return hideOption();" /> Adventurer<br />
-	  <input type="radio" name="rdoType" value="premium" onclick="return hideOption();" /> Water Lover<br />
-	  <input type="radio" name="rdoType" value="ultimate" onclick="return hideOption();" /> Beach Bum
-	  
-       <center><input type="button" onclick="return writePCCookies()" value="Submit Your Order"></center>
+	  <input type="checkbox" value="Winery Tour" name="chkOption" onclick="return orderSummary()"> Winery Tour <br />
+  </div>
+  <div id="left_center">
+    <input type="checkbox" value="Deep Sea Fishing" name="chkOption" onclick="return orderSummary()"> Deep Sea Fishing <br />
+	  <input type="checkbox" value="Dune Buggy" name="chkOption" onclick="return orderSummary()"> Dune Buggy <br />
+	  <input type="checkbox" value="Horseback Riding" name="chkOption" onclick="return orderSummary()"> Horseback Riding <br />
+  </div>
+</div>
+<div class="right">
+  <div id="right_center">
+    <input type="checkbox" value="Guided Hike" name="chkOption" onclick="return orderSummary()"> Guided Hike <br />
+	  <input type="checkbox" value="Surfing" name="chkOption" onclick="return orderSummary()"> Surfing <br />
+	  <input type="checkbox" value="Snorkeling" name="chkOption" onclick="return orderSummary()"> Snorkeling <br />
+  </div>
+  <div id="right_right">
+    <input type="checkbox" value="Bike Tour" name="chkOption" onclick="return orderSummary()"> Bike Tour <br />
+	  <input type="checkbox" value="Beach Party" name="chkOption" onclick="return orderSummary()"> Beach Party <br />
+	  <input type="checkbox" value="Rock Climbing" name="chkOption" onclick="return orderSummary()"> Rock Climbing <br />
+  </div>
+</div>
+  </div>
+  <label>Or select from one of our specialty packages</label>
+  <div class="info_block specialty">
+	  <div><input type="radio" name="rdoType" value="water" onclick="return hideOption();" /> Water Lover<br /></div>
+    <div><input type="radio" name="rdoType" value="move" onclick="return hideOption();" /> On the Move<br /></div>
+	  <div><input type="radio" name="rdoType" value="pamper" onclick="return hideOption();" /> Pamper Me<br /></div>
+	  <div><input type="radio" name="rdoType" value="adventurer" onclick="return hideOption();" /> Adventurer<br /></div>
+  </div>
+</div>
+       <center><input type="button" onclick="return writeTravelCookies()" value="Submit Your Order"></center>
     </form>
   </article>
   <aside>
-    <div class="orderSum" id="orderSum" style="height: 175px">Order Summary: <br />3 days / 2 nights <br /></div>
+    <div class="orderSum" id="orderSum" style="height: 250px;">Order Summary: <br />3 days / 2 nights <br /></div>
       <br /><br /><br />
       <div id="priceSum">
 	<p>Subtotal: $1999.95</p>
 	<p style="border-bottom-color: White; border-bottom-width: 1px; border-bottom-style: solid;">Tax: .78</p>
 	<p>Total: $1999.99</p>
-      </div>	
+      </div>
   </aside>
+</div>
 
 <script type="text/javascript">
 <!--

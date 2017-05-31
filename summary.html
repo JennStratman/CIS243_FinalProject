@@ -1,14 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
-
+﻿<!DOCTYPE html>
+<html>
 <head>
-<title>PC Order</title>
-       <meta name="author" content="EDCC" />
-       <meta name="keywords" content="final project 'PC Superstore', based on wireframe" />
-       <meta name="description" content="This template is intended to be used as a base to build my PC Superstore web page." />
+<title>Vacation Package Order</title>
+       <meta name="author" content="Jennifer Stratman" />
+       <meta name="keywords" content="final project based on the 'PC Superstore', based on wireframe" />
+       <meta name="description" content="This is a summary of the vacation package ordered through the travel emporium." />
        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
        <meta name="robots" content="none" />
-	   <link rel="stylesheet" href="pcStyle.css" type="text/css" />
+	   <link rel="stylesheet" href="travelStyle.css" type="text/css" />
 	   <script type="text/javascript" src="test.js"></script>
 	   <script type="text/javascript" src="cookies.js"></script>
 <script type="text/javascript">
@@ -17,87 +16,71 @@
         // content of your Javascript goes here
 //]]>
 //-->
-</script> 
+</script>
 <script type="text/javascript">
- 
- 
+
+
 </script>
 
 </head>
-<body style="color:white"  onLoad="secondPassed()">
-
+<body onLoad="secondPassed()">
 <form action="summary.html" onsubmit="return orderSummary()">
-<table name="main" cellpadding="5" width="100%" border="0">
-	<tr>
-		<td width="317">
-			<img src="graphics/pc.jpeg" width="317" height="159" alt="" border="0">
-		</td>
-		<td width="1px">&nbsp;</td>
-		<td valign="bottom" class="header">PCSuperstoreExample.com Lab: Jennifer Stratman, 05/10/2017</td>
-		<td width="1px">&nbsp;</td>
-		<td width="300" valign="bottom" class="contact">
-			20000 68th Ave. W<br />
-			Lynnwood, WA 98036<br />
-			425.222.1234
-		</td>
-	</tr>
-	<tr>
-		<td colspan="5">
-			<hr style="background-color:white" />
-		</td>
-	</tr>
-	<tr>
-		<td rowspan="3" valign="top">
-			<a href="home.html" class="orderSum">Home</a><br />
-			<a href="contact.html" class="orderSum">Contact Us</a><br />
-			<a href="order.html" class="orderSum">Order Now</a>
-		</td>
-		<td style="background-color:white" rowspan="3">&nbsp;</td>
-		<td valign="top" class="menu">
-<h2>Thank you for ordering from PCSuperstoreExample.com</h2>
-<div style="padding-left:50px">
-<p>Your order will be to you within</p><p id="countdown" class="timer" style="text-align:center;"></p>
+  <header>
+<!--    <img src="graphics/beach.jpeg" width="238" height="120" alt="" border="0"> -->
+    <h1>Jennifer Stratman's Travel Emporium</h1>
+    <div class="address">20000 68th Ave. W<br />
+		     Lynnwood, WA 98036<br />
+		     425.222.1234</div>
+  </header>
 
-<p>You PC will be delivered to:</p>
+  <div class="wrapper">
+    <nav class="linkhead" id="navLink">
+      <a href="index.html" class="orderSum">Home</a><br />
+      <a href="contact.html" class="orderSum">Contact Us</a><br />
+      <a href="order.html" class="orderSum">Order Now</a>
+      <a href="javascript:void(0);" class="icon" onclick="navFunction()">&#9776;</a>
+    </nav>
 
-<script type="text/javascript">
-<!--
-//<![CDATA[
+    <article id="summaryArticle">
+      <h2>Thank you for ordering from Jennifer Stratman's Travel Emporium</h2>
+      <div style="padding-left:50px">
+      <p>Your confirmation package will be to you within</p><p id="countdown" class="timer" style="text-align:center;"></p>
 
-document.write(GetCookie("custName") + "<br />");
-document.write(GetCookie("custAddress") + "<br />");
-document.write(GetCookie("custCity") + "<br />");
+      <p>Your confirmation package will be delivered to:</p>
 
-//]]>
-//-->
-</script>
-<p>The PC you ordered:
-<script type="text/javascript">
+      <script type="text/javascript">
+      <!--
+      //<![CDATA[
 
-document.write(GetCookie("PCDesc"));
+      document.write(GetCookie("custName") + "<br />");
+      document.write(GetCookie("custEmail") + "<br />");
+/*      document.write(GetCookie("custAddress") + "<br />");
+      document.write(GetCookie("custCity") + "<br />"); */
+
+      //]]>
+      //-->
+      </script>
+      <p>The vacation you ordered:
+      <script type="text/javascript">
+
+      document.write(GetCookie("TravelDesc"));
 
 
-</script>
-<p>The final price for your PC is:</p>
+      </script>
+      <p>The final price for your vacation package is:</p>
 
-<p align="right">
-<script type="text/javascript">
-<!--
-//<![CDATA[
+      <p align="right">
+      <script type="text/javascript">
+      <!--
+      //<![CDATA[
 
-document.write(GetCookie("PriceSum"));
+      document.write(GetCookie("PriceSum"));
 
-//]]>
-//-->
-</script></p></div>
-		</td>
-		<td rowspan="3" width="1" style="background-color: White;"></td>
-	</tr>
-	
-		
+      //]]>
+      //-->
+      </script></p></div>
+    </article>
+  </div>
 
-	
-	
-</table>
 </body>
 </html>
