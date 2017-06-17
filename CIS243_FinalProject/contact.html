@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Travel Order</title>
+       <meta name="author" content="Jennifer Stratman" />
+       <meta name="keywords" content="final project 'Travel Store', based on wireframe" />
+       <meta name="description" content="This is a mock Travel Store for final project in CIS243." />
+       <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+       <meta name="robots" content="none" />
+	   <link rel="stylesheet" href="css/travelStyle.css" type="text/css" />
+		<script type="text/javascript" src="js/test.js"></script>
+<!--	   <script src="library.js" type="text/javascript"></script> -->
+	   <script type="text/javascript" src="js/cookies.js"></script>
+</head>
+
+<body>
+  <header>
+<!--    <img src="graphics/beach.jpeg" width="238" height="120" alt="" border="0"> -->
+    <h1>Jennifer Stratman's Travel Emporium</h1>
+    <div class="address">20000 68th Ave. W<br />
+		     Lynnwood, WA 98036<br />
+		     425.222.1234</div>
+  </header>
+
+  <div class="wrapper">
+    <nav class="linkhead" id="navLink">
+      <a href="home.html" class="orderSum">Home</a><br />
+      <a href="contact.html" class="orderSum">Contact Us</a><br />
+      <a href="order.html" class="orderSum">Order Now</a>
+      <a href="javascript:void(0);" class="icon" onclick="navFunction()">&#9776;</a>
+  </nav>
+
+  <article id="contactArticle">
+    <h2 id="intro">Questions? Comments? We would love to hear from you. Give us a call or fill out the form below.</h2>
+    <form action="php/addComment.php" method="post" id="customerFeedback" onsubmit="return writeFeedbackCookie();">
+      Make sure to complete all fields marked with an asterix (*) if you would like a response. (We need to know how to reach you).
+      <fieldset>
+        <legend>Your contact information*</legend>
+        <div>Name: <input type="text" size="30" name="txtNameFeedback"></div>
+        <div>Email: <input type="text" size="30" name="txtEmail"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Background information</legend>
+        <div>How did you find our site?
+        <select name="selectFind">
+          <option>Bob Dole told me</option>
+          <option>I found a chicken and it led me</option>
+          <option>Purely an accident</option>
+          <option>I am a stalker</option>
+        </select>
+      </div>
+      <div>
+        Are you a current customer?
+        <input type="radio" name="currentCust" value="Y" checked/>Yes
+        <input type="radio" name="currentCust" value="N"/>No
+      </div>
+      </fieldset>
+	  <fieldset>
+	  <legend>Comments <span style='font-size: 0.7em'>(max 256 characters)</span></legend>
+	  <textarea cols='45' rows='9' maxlength='256' name="txtComments" placeholder="We'd love to hear from you. Please provide your feedback here."></textarea>
+	  </fieldset>
+	  
+	  <input type="submit" name="feedbackSubmit" value="Submit your Feedback" />
+    </form>
+  </article>
+
+  </div>
+</body>
+</html>
