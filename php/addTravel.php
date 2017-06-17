@@ -1,7 +1,11 @@
 <?php
 session_start();
 // connect to the database
+// For PC
 $mysqli = new mysqli("localhost", "root", "", "TravelStoreDeluxe");
+// For Mac
+//$mysqli = new mysqli("localhost", "root", "root", "TravelStoreDeluxe");
+
 /* check connection */
 if ($mysqli->connect_errno) {
 printf("Connect failed: %s\n", $mysqli->connect_error);
@@ -35,7 +39,8 @@ $custSID = session_id();
 }
 // redirect the user back to the order page, they have gotten to this page somehow
 else {
-header('Location: '."../order.html");
+    printf("Connection failed");
+//header('Location: '."../order.html");
 }
 // write customer information into database
 $sql = "INSERT INTO `customers` (`custFName`, `custlName`, `custEmail`, `custAdd1`, `custAdd2`, `custCity`, `custState`, `custZip`, `custPhone`, `custSID`) ";
@@ -59,7 +64,8 @@ $custPhone = "";
 }
 // redirect the user to the order page, they have gotten to this page somehow without completing the customer form.
 else {
-header('Location: '."../order.html");
+    printf("Connect failed: customer first name is %s\n customer last name is %s\n\n email is %s\n customer address is %s\n\n customer Apartment is %s\n\n and their city... %s\n", $custFName, $custLName, $custEmail, $custAdd1, $custAdd2, $custCity);
+//header('Location: '."../order.html");
 }
 // get the new customer ID from the database
 $sql = "SELECT custID FROM customers WHERE custSID = '$custSID';";
@@ -72,6 +78,7 @@ $newCustId = $row['custID'];
 }
 }
 else {
+
 header('Location: '."../order.html");
 }
 // write Travel infromation through retrieved cookies, originally set in JavaScript
@@ -88,7 +95,8 @@ if ($mysqli->query($sql) === TRUE) {
 header('Location: '."../summary.html");
 }
 else {
-header('Location: '."../order.html");
+printf("Connect failed: customer first name is %s\n customer last name is %s\n\n email is %s\n customer address is %s\n\n customer Apartment is %s\n\n Are they a current customer? %s\n and their city... %s\n", $custFName, $custLName, $custEmail, $custAdd1, $custAdd2, $custCity);
+//header('Location: '."../order.html");
 }
 mysqli_close($mysqli);
 ?>

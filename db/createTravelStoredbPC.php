@@ -7,19 +7,27 @@ error_reporting(E_ALL ^ E_DEPRECATED);
 Created by lho 5/3/2016
 Purpose: create TravelShope database.
 a consistant db for students to work with the final project
-Updates:
+Updates: 
+Updated by Jennifer Stratman 05/20/2017
+Purpose: modifiy for Travel shop instead of pizza/PC shop, also updated to remove deprecated code
+
+Updated by Jennifer Stratman 06/11/2017
+Purpose: add feedback table to store customer feedback
 */
 $servername = "localhost";
 $username = "root";
+// Password for Mac
+//$password = "root";
+// Password for PC
 $password = "";
-$dbname = "myDB";
+
 // create the connection string to MySQL
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $username, $password);
 
 // verify the connection, display error if connection is not made
 if (!$conn) {
-die('Could not connect: ' . mysqli_connect_error() . " <br />");
+die('Could not connect: ' . mysqli_connect_error($conn) . " <br />");
 }
 
 /****************************************************************************
@@ -49,7 +57,7 @@ echo "Unique checks failed: " . mysqli_error($conn) . "<br />";
 // create SQL Statement
 $sql = "SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;";
 // run SQL statement and verify that it worked, display error
-if (mysqli_query($sql,$conn)){
+if (mysqli_query($conn,$sql)){
 echo "Foreign keys set to 0 <br />";
 }
 else {
@@ -58,7 +66,7 @@ echo "Foreign keys failed: " . mysqli_error($conn) . "<br />";
 // create SQL Statement
 $sql = "SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';";
 // run SQL statement and verify that it worked, display error
-if (mysqli_query($sql,$conn)){
+if (mysqli_query($conn,$sql)){
 echo "SQL mode set correctly <br />";
 }
 else {
@@ -242,5 +250,84 @@ echo "fk_Travels_administrators FK created <br />";
 else {
 echo "fk_Travels_administrators FK not created: " . mysqli_error($conn) . "<br />";
 }
+
+/*
+-- -----------------------------------------------------
+-- Table `Feedback`
+-- -----------------------------------------------------
+*/
+// drop existing Feedback` table
+// create SQL Statement
+$sql = "DROP TABLE IF EXISTS `Feedback`;";
+// run SQL statement and verify that it worked, display error
+if (mysqli_query($conn,$sql)){
+echo "Feedback table dropped <br />";
+}
+else {
+echo "Feedback table not dropped or did not exist: " . mysqli_error($conn) . "<br />";
+}
+// create the Feedback table
+$sql = "CREATE TABLE IF NOT EXISTS `Feedback` (";
+$sql = $sql . "`FeedbackID` INT NOT NULL AUTO_INCREMENT, ";
+$sql = $sql . "`FeedbackTime` DATETIME NOT NULL, ";
+$sql = $sql . "`custNameFeedback` VARCHAR(45) NOT NULL, ";
+$sql = $sql . "`custEmail` VARCHAR(45) NOT NULL, ";
+$sql = $sql . "`custCurrent` VARCHAR(1) NOT NULL DEFAULT 'Y', ";
+$sql = $sql . "`custSelectFind` VARCHAR(45) NULL, ";
+$sql = $sql . "`custComments` VARCHAR(256) NOT NULL, ";
+$sql = $sql . "`feedbackAddressed` VARCHAR(1) NOT NULL DEFAULT 'N', ";
+$sql = $sql . "`adminsrators_adminID` INT NULL, ";
+$sql = $sql . "`custFeedbackSID` VARCHAR(100) NOT NULL, ";
+$sql = $sql . "PRIMARY KEY (`FeedbackID`) ) ";
+$sql = $sql . "ENGINE = InnoDB; ";
+
+
+// run SQL statement and verify that it worked, display error
+if (mysqli_query($conn,$sql)){
+echo "Feedback table created <br />";
+}
+else {
+echo "Feedback table not created: " . mysqli_error($conn) . "<br />";
+}
+// add foreign keys
+// create SQL statment
+
+// For now, no foreign keys required for this. 
+// If I add an input for customers to include their travelID then there will be a need for the foreign keys.
+//$sql = "ALTER TABLE `TravelStoredeluxe`.`Feedback` ";
+//$sql = $sql . "ADD CONSTRAINT `fk_Travels_customers` ";
+//$sql = $sql . "FOREIGN KEY (`customers_custID` ) ";
+//$sql = $sql . "REFERENCES `TravelStoredeluxe`.`customers` (`custID` ) ";
+//$sql = $sql . "ON DELETE NO ACTION ";
+//$sql = $sql . "ON UPDATE NO ACTION ";
+//$sql = $sql . ", ADD INDEX `fk_Travels_customers_idx` (`customers_custID` ASC) ;";
+
+// run SQL statement and verify that it worked, display error
+//if (mysqli_query($conn,$sql)){
+//echo "fk_Travels_customers FK created <br />";
+//}
+//else {
+//echo "fk_Travels_customers FK not created: " . mysqli_error($conn) . "<br />";
+//}
+
+// add foreign keys
+// create SQL statment
+$sql = "ALTER TABLE `TravelStoredeluxe`.`Feedback` ";
+$sql = $sql . "ADD CONSTRAINT `fk_Feedback_administrators` ";
+$sql = $sql . "FOREIGN KEY (`adminsrators_adminID` ) ";
+$sql = $sql . "REFERENCES `TravelStoredeluxe`.`administrators` (`adminID` ) ";
+$sql = $sql . "ON DELETE NO ACTION ";
+$sql = $sql . "ON UPDATE NO ACTION ";
+$sql = $sql . ", ADD INDEX `fk_Feedback_administrators_idx` (`adminsrators_adminID` ASC) ;";
+// run SQL statement and verify that it worked, display error
+if (mysqli_query($conn,$sql)){
+echo "fk_Feedback_administrators FK created <br />";
+}
+else {
+echo "fk_Feedback_administrators FK not created: " . mysqli_error($conn) . "<br />";
+}
+
+
+
 echo "<br /><br />";
 echo "<h3>Database successfully created</h3>";

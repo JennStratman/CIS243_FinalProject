@@ -7,10 +7,10 @@
        <meta name="description" content="This is a mock Travel Store for final project in CIS243." />
        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
        <meta name="robots" content="none" />
-	   <link rel="stylesheet" href="travelStyle.css" type="text/css" />
-		<script type="text/javascript" src="test.js"></script>
+	   <link rel="stylesheet" href="css/travelStyle.css" type="text/css" />
+		<script type="text/javascript" src="js/test.js"></script>
 <!--	   <script src="library.js" type="text/javascript"></script> -->
-	   <script type="text/javascript" src="cookies.js"></script>
+	   <script type="text/javascript" src="js/cookies.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 
   <div class="wrapper">
     <nav class="linkhead" id="navLink">
-      <a href="index.html" class="orderSum">Home</a><br />
+      <a href="home.html" class="orderSum">Home</a><br />
       <a href="contact.html" class="orderSum">Contact Us</a><br />
       <a href="order.html" class="orderSum">Order Now</a>
       <a href="javascript:void(0);" class="icon" onclick="navFunction()">&#9776;</a>
@@ -32,17 +32,17 @@
 
   <article id="contactArticle">
     <h2 id="intro">Questions? Comments? We would love to hear from you. Give us a call or fill out the form below.</h2>
-    <form>
+    <form action="php/addComment.php" method="post" id="customerFeedback" onsubmit="return writeFeedbackCookie();">
       Make sure to complete all fields marked with an asterix (*) if you would like a response. (We need to know how to reach you).
       <fieldset>
-        <legend>Your contact information:</legend>
-        <div>Name: <input type="text" size="30"></div>
-        <div>Email: <input type="text" size="30"></div>
+        <legend>Your contact information*</legend>
+        <div>Name: <input type="text" size="30" name="txtNameFeedback"></div>
+        <div>Email: <input type="text" size="30" name="txtEmail"></div>
       </fieldset>
       <fieldset>
         <legend>Background information</legend>
         <div>How did you find our site?
-        <select>
+        <select name="selectFind">
           <option>Bob Dole told me</option>
           <option>I found a chicken and it led me</option>
           <option>Purely an accident</option>
@@ -51,10 +51,16 @@
       </div>
       <div>
         Are you a current customer?
-        <input type="radio" name="currentCust" value="Yes"/>Yes
-        <input type="radio" name="currentCust" value="No"/>No
+        <input type="radio" name="currentCust" value="Y" checked/>Yes
+        <input type="radio" name="currentCust" value="N"/>No
       </div>
       </fieldset>
+	  <fieldset>
+	  <legend>Comments <span style='font-size: 0.7em'>(max 256 characters)</span></legend>
+	  <textarea cols='45' rows='9' maxlength='256' name="txtComments" placeholder="We'd love to hear from you. Please provide your feedback here."></textarea>
+	  </fieldset>
+	  
+	  <input type="submit" name="feedbackSubmit" value="Submit your Feedback" />
     </form>
   </article>
 

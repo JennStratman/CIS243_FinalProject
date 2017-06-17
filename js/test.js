@@ -36,8 +36,8 @@ var OptionPrice = [
     105.00,
     29.00,
     45.00,
-	  50.00,
-	  45.00,
+	50.00,
+	45.00,
     89.00,
     50.00,
     25.00,
@@ -174,15 +174,17 @@ information)
 /*if(document.forms[0].this.options[this.selectedIndex].val == i) {
     intWhichSpec = i;
 */
+
 var len = form.partySize.length;
 for(var i = 0; i < len; i++) {
   if(form.partySize.options[i].selected) {
     var myValue = form.partySize.options[i].value;
+	alert("The value of the select tag is " + myValue);
   }
   // Use myValue inside the loop, if needed
 }
 // Use myValue outside the loop, if needed
-alert("The value of the select tag is " + myValue);
+
 /*
   switch(selectedValue){
     case 1:
@@ -288,7 +290,6 @@ parameters:		formIndex as an integer, representing the form number within the pa
 */
 
 function ckform(formIndex){
-
 	// identifed txtFName as the field 15 of the form
 	var intStartCheck = 15;
 	var intNumFields = document.forms[formIndex].elements.length;
@@ -314,7 +315,6 @@ function ckform(formIndex){
 
 	SetCookie("Customer", strCustomer);
 
-
 	SetCookie("custFName", document.forms[0].txtFName.value);
 	SetCookie("custLName", document.forms[0].txtLName.value);
 	SetCookie("custAddress", document.forms[0].txtAddress.value);
@@ -323,9 +323,12 @@ function ckform(formIndex){
 	}
 	SetCookie("custCity", document.getElementById("txtCity").value);
 	SetCookie("custState", document.getElementById("txtState").value);
+//	SetCookie("custState", document.getElementById("txtState").selectedIndex);
+//	SetCookie("custState", document.forms[0].elements["state"].options[selected_index].value);
+//	SetCookie("custState", document.forms[0].elements["state"].options[document.forms[0].elements["state"]].value);
+//	SetCookie("custState", document.getElementById("txtState").options[selected_index].value);
 	SetCookie("custZip", document.getElementById("txtZip").value);
 	SetCookie("custPhone", document.forms[0].txtPhone.value);
-
 
 	return true;
 }
@@ -462,11 +465,110 @@ function writeCustCookie(){
 
 	SetCookie("custName", document.forms[0].txtFName.value + " " + document.forms[0].txtLName.value);
 	SetCookie("custAddress", document.forms[0].txtAddress.value + " " + document.forms[0].txtApartment.value);
-	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.forms[0].txtState.value + " " + document.forms[0].txtZip.value);
 	SetCookie("custEmail", document.forms[0].txtEmail.value);
 	SetCookie("custPhone", document.forms[0].txtPhone.value);
+	// REMOVED ZIP CODE
+	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.forms[0].txtState.value + " " + document.forms[0].txtZip.value);
+//	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.forms[0].txtZip.value);
+//	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.forms[0].txtState.selectedIndex + " " + document.forms[0].txtZip.value);
+//	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.forms[0].elements["state"].options["selected_index"].value + " " + document.forms[0].txtZip.value);
+//	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.forms[0].elements["state"].options[document.forms[0].elements["state"]].value + " " + document.forms[0].txtZip.value);
+
+//	SetCookie("custCity", document.forms[0].txtCity.value + ", " + document.getElementById("txtState").options[selected_index].value + " " + document.forms[0].txtZip.value);
 	return true;
 }
+
+/* ----------------------------------------------
+function chAdminForm(){
+purpose:	checks the customer information form for complete and correct information
+author:		Jennifer Stratman
+date:		06/11/2017
+parameters:	none
+---------------------------------------------- */
+function chAdminForm(){
+	var intNumFields = document.forms[0].elements.length;
+	var userExp = /[A-Za-z0-9]{6,}/;
+	var passExp = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+	// check that values have been entered into required fields
+	for (var i = 0; i < intNumFields; i++){
+		if (document.forms[0].elements[i].value.length == 0){
+			document.getElementById(document.forms[0].elements[i].name).innerHTML = "Required Field";
+			document.forms[0].elements[i].focus();
+			document.forms[0].elements[i].select();
+			return false;
+		}
+	}
+
+	// check that user name has been correctly formatted
+	if (!userExp.test(document.forms[0].adminUserName.value)){
+		document.getElementById("adminUserName").innerHTML = "Please enter a valid user name";
+		document.forms[0].adminUserName.focus();
+		document.forms[0].adminUserName.select();
+		return false;
+	}
+
+	// check that password is correctly formatted
+	if (!passExp.test(document.forms[0].adminNewPassword.value)){
+		document.getElementById("adminNewPassword").innerHTML = "Password must be at least 8 characters";
+		document.forms[0].adminNewPassword.focus();
+		document.forms[0].adminNewPassword.select();
+		return false;
+	}
+	// check that the confirmation password matches the first entry
+	if (document.forms[0].adminNewPassword.value != document.forms[0].adminPassword.value){
+		document.getElementById("adminPassword").innerHTML = "Confirmation password does not match";
+		document.forms[0].adminPassword.focus();
+		document.forms[0].adminPassword.select();
+		return false
+	}
+
+	// administrator information is correct write cookie for administrator information
+	writeAdminCookie();
+
+	return true;
+	//return false;
+}
+
+/* ----------------------------------------------
+function writeAdminCookie(){
+purpose:	Writes the administrator information cookies
+author:		Jennifer Stratman
+date:		06/11/2017
+parameters:	none
+---------------------------------------------- */
+function writeAdminCookie(){
+
+	SetCookie("adminName", document.forms[0].adminFName.value + " " + document.forms[0].adminLName.value);
+	SetCookie("adminUser", document.forms[0].adminUserName.value);
+	SetCookie("adminPass", document.forms[0].adminPassword.value);
+	return true;
+}
+
+/*--------------------------------------------
+function checkAvailability() {
+purpose:	Checks username availability
+author:		Jennifer Stratman
+date:		06/12/2017
+parameters:	none
+--------------------------------------------- */
+function checkAvailability() {
+	$("#loaderIcon").show();
+	jQuery.ajax({
+	url: "../php/check_availability.php",
+	data:'adminUser='+$("#username").val(),
+	type: "POST",
+	success:function(data){
+		$("#user-availability-status").html(data);
+		$("#loaderIcon").hide();
+	},
+	error:function (){alert('error occurred: ')}
+	});
+}
+
+
+
+
 
 
 var milisec=0;
